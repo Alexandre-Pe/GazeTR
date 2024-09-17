@@ -46,7 +46,7 @@ def readfolder(data, specific=None, reverse=False):
         
         folder = [folders[i] for i in specific]
 
-    data.label = [os.path.join(data.label, j) for j in folder]
+    data.label = [os.path.join(data.label, f) for f in folder]
 
     return data, folders
 
