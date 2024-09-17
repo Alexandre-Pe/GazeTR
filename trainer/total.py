@@ -87,7 +87,7 @@ def main(config):
     savepath = os.path.join(save.metapath, save.folder, f"checkpoint")
 
     if not os.path.exists(savepath):
-        os.makedirs(savepath)
+        os.makedirs(savepath, exist_ok=True)
  
     # =====================================>> Training << ====================================
     print("===> Training <===")
