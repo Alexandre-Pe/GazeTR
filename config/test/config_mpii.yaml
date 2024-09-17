@@ -7,10 +7,10 @@ test:
         steps: 10
 
     data: 
-        image: "/userdata/MPII.zip/MPIIFaceGaze/Image"
-        label: "/userdata/MPII.zip/MPIIFaceGaze/Label"
+        image: "D:/PhD/Datasets/MPIIFaceGaze/images"
+        label: "D:/PhD/Datasets/MPIIFaceGaze/labels"
         name: mpii
-        header: True
+        header: False
         isFolder: True
 
     savename: "evaluation"

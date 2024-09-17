@@ -18,7 +18,7 @@ train:
     data:
         image: "D:/PhD/Datasets/MPIIFaceGaze/images"
         label: "D:/PhD/Datasets/MPIIFaceGaze/labels"
-        header: True
+        header: False
         name: mpii
         isFolder: True
         
