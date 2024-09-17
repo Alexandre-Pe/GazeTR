@@ -10,21 +10,21 @@ train:
         warmup: 5
 
     save:
-        metapath: "/userhome/share_hosts/work/Transformer/ComTrans/exp/Transformer-6layers"
+        metapath: "D:/PhD/Experiments/gazetr/Transformer-6layers"
         folder: mpii
         model_name: trans6
         step: 10
 
     data:
-        image: "/userdata/MPII.zip/MPIIFaceGaze/Image"
-        label: "/userdata/MPII.zip/MPIIFaceGaze/Label"
+        image: "D:/PhD/Datasets/MPIIFaceGaze/images"
+        label: "D:/PhD/Datasets/MPIIFaceGaze/labels"
         header: True
         name: mpii
         isFolder: True
         
     pretrain:
-        enable: True
-        path: "/userhome/share_hosts/work/Transformer/ComTrans/exp/Transformer-6layers/eth/checkpoint/Iter_50_trans6.pt"
+        enable: False # True
+        path: "D:/PhD/Experiments/gazetr/Transformer-6layers/mpii/checkpoint/Iter_50_trans6.pt"
         device: 0
 
     device: 0
