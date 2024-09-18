@@ -20,19 +20,18 @@ def Decode_MPII(line):
     anno = edict()
     anno.face = line[0]
     anno.gaze2d = [float(line[1]), float(line[2])]
-    anno.head2d = [ [float(line[4]), float(line[5])],
-                    [float(line[6]), float(line[7])],
-                    [float(line[8]), float(line[9])],
-                    [float(line[10]), float(line[11])],
-                    [float(line[12]), float(line[13])],
-                    [float(line[14]), float(line[15])]]
-    anno.head3d = [ [float(line[16]), float(line[17]), float(line[18])],
-                    [float(line[19]), float(line[20]), float(line[21])]]
-    anno.facecenter = [float(line[22]), float(line[23]), float(line[24])]
-    anno.gaze3d = [float(line[25]), float(line[26]), float(line[27])]
-    anno.eye = line[28]
-    anno.righteye = [[float(line[4]), float(line[5])], [float(line[6]), float(line[7])]]
-    anno.lefteye = [[float(line[8]), float(line[9])], [float(line[10]), float(line[11])]]
+    anno.head2d = [[float(line[3]), float(line[4])],
+                   [float(line[5]), float(line[6])],
+                   [float(line[7]), float(line[8])],
+                   [float(line[9]), float(line[10])],
+                   [float(line[11]), float(line[12])],
+                   [float(line[13]), float(line[14])]
+                  ]
+    anno.head3d = [[float(line[15]), float(line[16]), float(line[17])],
+                   [float(line[18]), float(line[19]), float(line[20])]]
+    anno.facecenter = [float(line[21]), float(line[22]), float(line[23])]
+    anno.gaze3d = [float(line[24]), float(line[25]), float(line[26])]
+    anno.eye = line[27]
     return anno
 
 def Decode_Diap(line):
@@ -120,9 +119,10 @@ class trainloader(Dataset):
 
       if dataset.header: self.data.line.pop(0)
 
-    # build transforms
+    # build transforms, resize to 224x224
     self.transforms = transforms.Compose([
-        transforms.ToTensor()
+        transforms.ToTensor(),
+        transforms.Resize((224, 224))
     ])
 
 
