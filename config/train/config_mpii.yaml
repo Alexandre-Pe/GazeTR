@@ -2,30 +2,38 @@
 train:
 
     params:
-        batch_size: 512
-        epoch: 80
+        batch_size: 32
+        epoch: 10
         lr: 0.0005
         decay: 0.5
         decay_step: 60
         warmup: 5
 
     save:
-        metapath: "D:/PhD/Experiments/gazetr/Transformer-6layers"
+        metapath: "D:/PhD/Experiments/gazetr/Transformer-1layers"
         folder: mpii
-        model_name: trans6
+        model_name: trans1
         step: 10
 
     data:
         image: "D:/PhD/Datasets/MPIIFaceGaze/images"
-        label: "D:/PhD/Datasets/MPIIFaceGaze/labels"
+        label: "D:/PhD/Datasets/MPIIFaceGaze/labels/p00.txt"
         header: False
         name: mpii
-        isFolder: True
+        isFolder: False
         
     pretrain:
         enable: False # True
-        path: "D:/PhD/Experiments/gazetr/Transformer-6layers/mpii/checkpoint/Iter_50_trans6.pt"
+        path: ""
         device: 0
+    
+    model:
+        maps: 64
+        nhead: 2
+        dim_feature: 49
+        dim_feedforward: 512
+        dropout: 0.1
+        num_layers: 1
 
     device: 0
 
