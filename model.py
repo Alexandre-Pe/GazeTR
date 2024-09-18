@@ -66,14 +66,8 @@ class TransformerEncoderLayer(nn.Module):
         return src
 
 class Model(nn.Module):
-    def __init__(self):
+    def __init__(self, maps, nhead, dim_feature, dim_feedforward, dropout, num_layers):
         super(Model, self).__init__()
-        maps = 32
-        nhead = 8
-        dim_feature = 7*7
-        dim_feedforward=512
-        dropout = 0.1
-        num_layers=6
 
         self.base_model = resnet18(pretrained=False, maps=maps)
 
