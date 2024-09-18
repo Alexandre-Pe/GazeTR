@@ -22,7 +22,11 @@ def main(config):
 
     dataloader = importlib.import_module("reader." + config.reader)
 
-    torch.cuda.set_device(config.device) 
+    # torch.cuda.set_device(config.device) 
+    device = torch.device(f"cuda:{config.device}")
+    torch.cuda.set_device(device)
+    # Set CUDA_VISIBLE_DEVICES environment variable
+    os.environ["CUDA_VISIBLE_DEVICES"] = str(config.device)
     cudnn.benchmark = True
 
     data = config.data
@@ -38,12 +42,17 @@ def main(config):
                     data,
                     params.batch_size, 
                     shuffle=True, 
-                    num_workers=8
+                    num_workers=2
                 )
 
 
     print("===> Model building <===")
-    net = model.Model()
+    net = model.Model(config.model.maps,
+                      config.model.nhead,
+                      config.model.dim_feature,
+                      config.model.dim_feedforward,
+                      config.model.dropout,
+                      config.model.num_layers)
     net.train(); net.cuda()
 
 
@@ -118,7 +127,8 @@ def main(config):
                 optimizer.zero_grad()
                 loss.backward()
                 optimizer.step()
-                rest = timer.step()/3600
+                rest_h = timer.step()//3600
+                rest_m = (timer.step()%3600)//60
 
 
                 if i % 20 == 0:
@@ -126,7 +136,7 @@ def main(config):
                           f"[{i}/{length}] " +\
                           f"loss:{loss} " +\
                           f"lr:{ctools.GetLR(optimizer)} " +\
-                          f"rest time:{rest:.2f}h"
+                          f"rest time: {rest_h}h {rest_m}m"
 
                     print(log); outfile.write(log + "\n")
                     sys.stdout.flush(); outfile.flush()
