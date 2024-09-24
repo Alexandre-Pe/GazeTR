@@ -24,7 +24,7 @@ train:
         
     pretrain:
         enable: False # True
-        path: ""
+        path: 
         device: 0
     
     model:
